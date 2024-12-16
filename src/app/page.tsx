@@ -61,15 +61,13 @@ export default function Home() {
           lineCount={lineCount}
         />
         {selectedMosque && (
-          <div className="fixed bottom-0 left-0 right-0 z-50">
-            <MosqueCard
-              mosque={selectedMosque}
-              nearestMosques={nearestMosques}
-              showCard={showCard}
-              onToggleCard={() => setShowCard(!showCard)}
-              lineCount={lineCount}
-            />
-          </div>
+          <MosqueCard
+            mosque={selectedMosque}
+            nearestMosques={nearestMosques}
+            showCard={showCard}
+            onToggleCard={() => setShowCard(!showCard)}
+            lineCount={lineCount}
+          />
         )}
       </div>
     </main>
