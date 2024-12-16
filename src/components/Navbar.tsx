@@ -24,7 +24,7 @@ export default function Navbar({ lineCount, onLineCountChange, onGeolocation }: 
       <div className="ml-auto flex space-x-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="text-black border-neutral-700 hover:bg-white/20">
+            <Button variant="outline" className="text-white border-neutral-700 hover:bg-white/20">
               <Settings className="mr-2 h-4 w-4" />
               Filter ({lineCount})
             </Button>
@@ -39,7 +39,7 @@ export default function Navbar({ lineCount, onLineCountChange, onGeolocation }: 
         </DropdownMenu>
         <Button 
           variant="outline" 
-          className="text-black border-neutral-700 hover:bg-white/20"
+          className="text-white border-neutral-700 hover:bg-white/20"
           onClick={onGeolocation}
         >
           Use Current Location
