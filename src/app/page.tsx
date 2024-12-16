@@ -19,6 +19,7 @@ export default function Home() {
   const [showCard, setShowCard] = useState(false);
   const [selectedMosque, setSelectedMosque] = useState<Mosque | null>(null);
   const [nearestMosques, setNearestMosques] = useState<Mosque[]>([]);
+
   const [userLocation, setUserLocation] = useState<[number, number] | null>(
     null
   );
@@ -46,13 +47,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black pt-16">
+    <main className="min-h-screen bg-black">
       <Navbar
         lineCount={lineCount}
         onLineCountChange={setLineCount}
         onGeolocation={handleGeolocation}
       />
-      <div className="relative z-0">
+      <div className="relative z-0 h-[calc(100dvh-4rem)]">
         <Map
           onMosqueSelect={setSelectedMosque}
           onNearestMosquesChange={setNearestMosques}
@@ -60,13 +61,15 @@ export default function Home() {
           lineCount={lineCount}
         />
         {selectedMosque && (
-          <MosqueCard
-            mosque={selectedMosque}
-            nearestMosques={nearestMosques}
-            showCard={showCard}
-            onToggleCard={() => setShowCard(!showCard)}
-            lineCount={lineCount}
-          />
+          <div className="absolute bottom-0 left-0 right-0">
+            <MosqueCard
+              mosque={selectedMosque}
+              nearestMosques={nearestMosques}
+              showCard={showCard}
+              onToggleCard={() => setShowCard(!showCard)}
+              lineCount={lineCount}
+            />
+          </div>
         )}
       </div>
     </main>
