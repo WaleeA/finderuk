@@ -96,6 +96,14 @@ function MapEvents({
   return null;
 }
 
+function PopupController() {
+  const map = useMapEvents({
+    movestart: () => {
+      map.closePopup()
+    }
+  })
+  return null
+}
 
 export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocation, lineCount }: MapProps) {
   const [nearestMosques, setNearestMosques] = useState<Mosque[]>([])
@@ -144,6 +152,7 @@ export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocati
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
       />
+      <PopupController />
       {SAMPLE_MOSQUES.map((mosque) => (
         <Marker
           key={mosque.id}
