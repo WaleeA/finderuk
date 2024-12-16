@@ -53,7 +53,7 @@ function CenterMarker({ onPositionChange }: { onPositionChange: (position: LatLn
     <Marker position={position} icon={userIcon} ref={markerRef}>
       <Popup className="bg-black/90 text-white border-neutral-800">
         <div className="p-2">
-          <h3 className="font-semibold">Center Location</h3>
+          <h3 className="font-semibold">Placed Marker</h3>
           <p className="text-sm text-neutral-400">Move the map to update</p>
         </div>
       </Popup>
