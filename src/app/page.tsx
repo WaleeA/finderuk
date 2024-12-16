@@ -47,13 +47,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-black pt-8">
       <Navbar
         lineCount={lineCount}
         onLineCountChange={setLineCount}
         onGeolocation={handleGeolocation}
       />
-      <div className="relative z-0 h-[calc(100dvh-4rem)]">
+      <div className="relative z-0 h-[calc(100dvh-2rem)]">
         <Map
           onMosqueSelect={setSelectedMosque}
           onNearestMosquesChange={setNearestMosques}
