@@ -61,29 +61,41 @@ function CenterMarker({ onPositionChange }: { onPositionChange: (position: LatLn
   )
 }
 
-function MapEvents({ onMosqueSelect, onNearestMosquesChange, lineCount }) {
-  const map = useMap()
+function MapEvents({
+  onMosqueSelect,
+  onNearestMosquesChange,
+  lineCount,
+}: {
+  onMosqueSelect: (mosque: Mosque) => void;
+  onNearestMosquesChange: (mosques: Mosque[]) => void;
+  lineCount: number;
+}) {
+  const map = useMap();
 
-  const updateNearestMosques = useCallback((center: LatLng) => {
-    const mosquesWithDistance = SAMPLE_MOSQUES.map(mosque => ({
-      ...mosque,
-      distance: calculateDistance(center.lat, center.lng, mosque.lat, mosque.lng)
-    }))
-    .sort((a, b) => a.distance! - b.distance!)
-    .slice(0, lineCount)
+  const updateNearestMosques = useCallback(
+    (center: LatLng) => {
+      const mosquesWithDistance = SAMPLE_MOSQUES.map((mosque) => ({
+        ...mosque,
+        distance: calculateDistance(center.lat, center.lng, mosque.lat, mosque.lng),
+      }))
+        .sort((a, b) => a.distance! - b.distance!)
+        .slice(0, lineCount);
 
-    onMosqueSelect(mosquesWithDistance[0])
-    onNearestMosquesChange(mosquesWithDistance)
-  }, [onMosqueSelect, onNearestMosquesChange, lineCount])
+      onMosqueSelect(mosquesWithDistance[0]);
+      onNearestMosquesChange(mosquesWithDistance);
+    },
+    [onMosqueSelect, onNearestMosquesChange, lineCount]
+  );
 
   useMapEvents({
     moveend: () => {
-      updateNearestMosques(map.getCenter())
+      updateNearestMosques(map.getCenter());
     },
-  })
+  });
 
-  return null
+  return null;
 }
+
 
 export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocation, lineCount }: MapProps) {
   const [nearestMosques, setNearestMosques] = useState<Mosque[]>([])
