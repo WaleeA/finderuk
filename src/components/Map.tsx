@@ -132,23 +132,6 @@ export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocati
     ])
   }, [mapCenter, nearestMosques])
 
-  const handleMapReady = useCallback((e: { target: L.Map }) => {
-    const map = e.target
-    mapRef.current = map
-    // Calculate initial nearest mosques based on default center
-    const center = map.getCenter()
-    const mosquesWithDistance = SAMPLE_MOSQUES.map((mosque) => ({
-      ...mosque,
-      distance: calculateDistance(center.lat, center.lng, mosque.lat, mosque.lng),
-    }))
-      .sort((a, b) => a.distance! - b.distance!)
-      .slice(0, lineCount);
-
-    setNearestMosques(mosquesWithDistance)
-    onNearestMosquesChange(mosquesWithDistance)
-    onMosqueSelect(mosquesWithDistance[0])
-  }, [lineCount, onMosqueSelect, onNearestMosquesChange])
-
   return (
     <MapContainer
       center={[51.5074, -0.1278]}
@@ -156,7 +139,6 @@ export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocati
       style={{ height: 'calc(100vh - 4rem)', width: '100%' }}
       className="bg-neutral-900 z-0"
       ref={mapRef}
-      whenReady={handleMapReady}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
