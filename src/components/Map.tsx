@@ -36,7 +36,7 @@ function CenterMarker({ onPositionChange }: { onPositionChange: (position: LatLn
       setPosition(newPos)
       onPositionChange(newPos)
     }
-    
+
     map.on('move', updatePosition)
     return () => {
       map.off('move', updatePosition)
@@ -132,7 +132,8 @@ export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocati
     ])
   }, [mapCenter, nearestMosques])
 
-  const handleMapCreated = useCallback((map: L.Map) => {
+  const handleMapReady = useCallback((e: { target: L.Map }) => {
+    const map = e.target
     mapRef.current = map
     // Calculate initial nearest mosques based on default center
     const center = map.getCenter()
@@ -155,7 +156,7 @@ export default function Map({ onMosqueSelect, onNearestMosquesChange, userLocati
       style={{ height: 'calc(100vh - 4rem)', width: '100%' }}
       className="bg-neutral-900 z-0"
       ref={mapRef}
-      whenCreated={handleMapCreated}
+      whenReady={handleMapReady}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
